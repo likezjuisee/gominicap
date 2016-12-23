@@ -1,0 +1,16 @@
+{% import "github.com/valyala/fasthttp" %}
+
+{% code 
+type IndexPage struct {
+    BasePage
+    CTX *fasthttp.RequestCtx
+}
+%}
+
+{% func (p *IndexPage) Title() %}
+    index page
+{% endfunc %}
+
+{% func (p *IndexPage) Body() %}
+    This is a base body
+{% endfunc %}

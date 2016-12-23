@@ -1,0 +1,34 @@
+{% import "github.com/valyala/fasthttp" %}
+
+{% code
+type DetailPage struct {
+    BasePage
+    CTX *fasthttp.RequestCtx
+}
+%}
+
+{% func (p *DetailPage) Title() %}
+    手机详情
+{% endfunc %}
+
+{% func (p *DetailPage) Body() %}
+	<body>
+		<h1>手机截图</h1>
+    	<div id="screen_div">
+    		<img id="minicapImg" style="display:block; width:360px;height:640px;">
+    	</div>
+  </body>
+{% endfunc %}
+
+{% func (p *DetailPage) JS() %}
+(function(){
+  var $img = $("#screen_div > img");
+  console.log("minicap ws connect...")
+  var ws = new WebSocket("ws://10.18.131.162:8080/minicap");
+  
+  ws.onmessage = function (message) {
+    $img.attr("src", message.data);
+  };
+
+})();
+{% endfunc %}

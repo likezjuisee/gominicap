@@ -1,0 +1,36 @@
+{% interface 
+Page {
+    Title()
+    Body()
+    JS()
+}
+%}
+
+{% func PageTemplate(p Page) %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <title>{%= p.Title() %} </title>
+    </head>
+    <body>
+        {%= p.Body() %}
+	</body>
+    <script>
+        {%= p.JS() %}
+    </script>
+</html>
+{% endfunc %}
+
+{% code type BasePage struct {} %}
+
+{% func (p *BasePage) Title() %}
+    index page
+{% endfunc %}
+
+{% func (p *BasePage) Body() %}
+    This is a base body
+{% endfunc %}
+
+{% func (p *BasePage) JS() %}
+{% endfunc %}
